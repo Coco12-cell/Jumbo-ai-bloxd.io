@@ -1,0 +1,11 @@
+# Jumbo 2.0.0
+* Added world guard! Using `!jguard "Area Name"`, you can set an area where other players cannot break blocks! You can use `!jguardedareas` as an owner or admin to see guarded areas as well.
+* New commands: `!jtp all` (tp all players to you) and `!jstop` (stop current Jumbo world builder task)
+* Multiple ranks can now be given to one player! The commands to do this are `!jadd <rank> username` and `!jremove <rank> username`. **With this update, `!jrank` and `!jdemote` no longer work** and !jadd and !jremove must be used instead. Each rank gives the player certain abilities:
+  * Dev: Can edit code at any time
+  * Admin: Can tp to/from or kick any player with a lower rank than them (builder or no rank) with `!jtp [to/from] username` and `!jkick username`, and can use `!jstop`. Can also guard areas with `!jguard "Area Name"` and see their own guarded areas with `!jguardedareas`.
+  * Builder: Can use all jumbo world builder commands, including `!jstop`.
+* **Setup is now handled differently**: in <#1377606764849004574>, you will find a *Setup Code Block* file and a *World Code* file. **The text from the *Setup Code Block* file must be copied into a Code Block** and pressed until you see the "Success!" message in the chat. *NOTE: Messages in chat that say `InternalError: Interrupted` are normal, but if you see the message `api.setStandardChestItemSlot received chest position in unloaded chunk`, you need to keep pressing the code block until you have seen the "Success!" message more than once.* **The text from the *World Code* file must then be copied into world code the same way as any other update.** Following these steps will be necessary every time you install an update to Jumbo going forward.
+* Pos1 and pos2 are now rounded.
+
+||<@&1382712195728543834>||
