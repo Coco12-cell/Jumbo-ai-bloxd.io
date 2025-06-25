@@ -1,0 +1,208 @@
+const e="2.0.0";var n,i;var o,s,c;if(!n){o={};i={};s={};c=0;n=true}const l=[5e5,-1,5e5];function cmp(e,n){let c=e.split("\n");if(!(n in o)){o[n]=0}if(!(n in i)){i[n]=false}if(!i[n]){for(let e=o[n];true;e+=1,o[n]+=1){let i=[5e5+e,0,5e5+n];while(api.getBlock(i)==="Unloaded"){}if(api.getBlock(i)!=="Chest"){break}else{api.setBlock(i,"Air")}}}i[n]=true;if(!(n in s)){s[n]=0}for(let e=s[n];e<c.length;e+=1,s[n]+=1){let i=[5e5+e,0,5e5+n];if(api.getBlock(i)!=="Chest"){api.setBlock(i,"Chest")}if(api.getBlock(i)==="Chest"){api.setStandardChestItemSlot(i,0,"Dirt",1,undefined,{customAttributes:{d:c[e]}})}}}api.sendMessage(myId,'Keep pressing this code block until you see a green "Success!" message below this.',{color:"yellow"});const d=`
+let r=Object.entries(getGuardedAreas());
+if(o||(r=r.filter((([a])=>a!==api[n.j](e)))),!r)return"No guarded areas";
+let i="";
+for(line of r){const e=line[1];
+i+=\`\${e[0]} (\${JSON.stringify(e[1])}, \${JSON.stringify(e[2])})\\n\`}return i
+`;const r=`
+api[n.l](5e5,2,5e5,e),api[n.l](5e5,2,5e5,"Air")
+`;const p=`
+return getPromotedPlayers().find((a=>a.dbId===e))
+`;const h=`
+return getPromotedPlayers().find((a=>a.name===e))
+`;const g=`
+const e=[5e5,-1,5e5];
+if("Chest"===api[n.k](e))return api[n.p](e,0).attributes.customAttributes.version
+`;const k=`
+const o=[5e5,1,5e5];
+if("Chest"!==api[n.k](o)){if("Unloaded"===api[n.k](o))return void api[n.d](
+"[AI] Jumbo: Setup failed with code 100, please try again.",{color:"yellow"});
+api[n.l](o,"Chest")}const r=api[n.p](o,0);
+if(r&&r.attributes.customDisplayName&&r.attributes.customDisplayName.includes("owner:"))
+return void api[n.d](
+"[AI] Jumbo: Setup has already been completed. If you believe this is an error, reset the chest manually.",
+{color:"yellow"});
+const i=api[n.j](e);
+api.setStandardChestItemSlot(o,0,"Dirt",1,e,{customDisplayName:\`owner: \${i}\`}),api[n.d](
+"[AI] Jumbo: Setup Complete.",{color:"yellow"})
+`;const m=`
+const l=o.toLowerCase();
+if("!jsetup"===l){return void(1===api[n.c]()?handleJSetupCommand(e):api[n.d](
+"[AI] Jumbo: Please do /kickall first!",{color:"yellow"}))}if("!jcredits"===l)return void api[n.d](
+"[AI] Jumbo: Made By: Aspect_SGK, TheCheeseEater, IgorYT, AeSoG, Monty Mole, and Nathan.",
+{color:"yellow"});
+const p=authorizePlayer(e);
+if(p){if(-1===p[0]){if(l.startsWith("!jadd ")){let i=o.match(
+/^!jadd\\s+(\\w+)\\s+(?:"([^"]+)"|(\\S+))\$/);
+if(!i)return void api[n.e](e,
+"[AI] Jumbo: Usage: !jadd <rank> username\\nAvailable ranks: dev, admin, builder",{color:"yellow"});
+let[l,s]=[i[1],i[2]||i[3]],d=api[n.i](s);
+if(d)if(d!==e){if("dev"===l.toLowerCase())return api[n.e](e,
+"[AI] Jumbo: WARNING! This rank gives a player owner-like access to your server and is extremely risky, are you sure you want to continue? (!jyes or !jno)",
+{color:"red"}),void(r=d);
+setRank(d,l.toLowerCase(),!1)}else api[n.e](e,"[AI] Jumbo: You cannot change your own rank!",
+{color:"yellow"});
+else api[n.e](e,"[AI] Jumbo: Player not found in lobby.",{color:"yellow"});
+return}if(l.startsWith("!jremove")){let r=o.split(" ");
+if(3!==r.length)return void api[n.e](e,
+"[AI] Jumbo: Usage: !jremove <rank> username\\nAvailable ranks: dev, admin, builder",
+{color:"yellow"});
+let i=r[1],l=r[2];
+return void setRank(api[n.i](l),i,!0)}if("!jyes"===l&&r)return setRank(r,"dev",!1),void(r=void 0);
+if("!jno"===l)return void(r=void 0)}if((-1===p[0]||p.includes(2)||p.includes(3))&&"!jstop"===l)
+return void(null!==c?(c=null,api[n.e](e,"[AI] Jumbo: Stopped task.",{color:"yellow"})):api[n.e](e,
+"[AI] Jumbo: No task running.",{color:"yellow"}));
+if(-1===p[0]||p.includes(2)){let r=o.split(" ");
+if(l.startsWith("!jtp")){if("all"===r[1]){if(-1===p[0]){let o=api[n.b]();
+for(let r of o)r!==e&&tp(r,e,!1);
+return}return void api[n.e](e,"[AI] Jumbo: You do not have permission to teleport all.",
+{color:"yellow"})}let o=api[n.i](r[2]);
+if(o){if(-1!==p[0]){let r=authorizePlayer(o);
+if(r&&r[0]<=2)return void api[n.e](e,"[AI] Jumbo: You cannot TP that person.",{color:"yellow"})}if(
+"here"===r[1])return void tp(o,e,!1);
+if("to"===r[1])return void tp(e,o,!0)}api[n.e](e,
+"[AI] Jumbo: Usage: !jtp [here/to] username | !jtp all",{color:"yellow"})}if(l.startsWith(
+"!jguard ")){let r=authorizePlayer(e);
+if(-1===r[0]||r.includes(2)){if(!s[e]||!d[e])return void api[n.e](e,
+"[AI] Jumbo: Error: pos1 and pos2 must be set first.",{color:"red"});
+const r=o.match(/^!jguard\\s+"(.+)"\$/);
+if(!r)return void api[n.e](e,'[AI] Jumbo: Usage: !jguard "Area Name"',{color:"yellow"});
+const i=r[1];
+addGuardedArea(e,s[e],d[e],i)}}if("!jguardedareas"===l&&prettyPrintGuardedAreas(e,-1===p[0]),l
+.startsWith("!jremoveguard")){const o=l.match(/^!jremoveguard\\s+"(.+)"\$/);
+if(!o)return void api[n.e](e,'[AI] Jumbo: Usage: !jremoveguard "Area Name"',{color:"yellow"});
+removeGuardedArea(e,o[1],-1===p[0])}if(l.startsWith("!jkick")){let o=api[n.i](r[1]);
+if(o){let r=authorizePlayer(o);
+return-1!==r[0]&&(-1===p[0]||!r||1===r.length&&r[0]>2||-1!==r[0]||-1===p[0])?void kickPlayer(e,o)
+:void api[n.e](e,"[AI] Jumbo: You cannot kick that person.",{color:"yellow"})}api[n.e](e,
+"[AI] Jumbo: Usage: !jkick username",{color:"yellow"})}}if(-1===p[0]||p.includes(3)){if(
+"!jpos1"===l){let o=api[n.a](e);
+return isFreePosition(o,e)?d[e]&&-1!==p[0]&&isIntersecting(o,d[e],e)?void api[n.e](e,
+"[AI] Jumbo: You cannot set position 1 if there is an area guarded by another player between you and position 2.",
+{color:"yellow"}):(s[e]=o,void api[n.e](e,
+\`[AI] Jumbo: pos1 set to \${s[e].map((e=>Math.round(e))).join(", ")}\`,{color:"yellow"})):void api[
+n.e](e,"[AI] Jumbo: You cannot set position 1 in an area guarded by another player.",
+{color:"yellow"})}if("!jpos2"===l){let o=api[n.a](e);
+return isFreePosition(o,e)||-1===p[0]?s[e]&&isIntersecting(s[e],o,e)?void api[n.e](e,
+"[AI] Jumbo: You cannot set position 2 if there is an area guarded by another player between you and position 1.",
+{color:"yellow"}):(d[e]=o,void api[n.e](e,
+\`[AI] Jumbo: pos2 set to \${d[e].map((e=>Math.round(e))).join(", ")}\`,{color:"yellow"})):void api[
+n.e](e,"[AI] Jumbo: You cannot set position 2 in an area guarded by another player.",
+{color:"yellow"})}if(l.startsWith("!jset ")){const r=o.match(/^!jset\\s+"([^"]+)"\$/);
+if(!r)return void api[n.e](e,'[AI] Jumbo: Usage: !jset "Block Name"',{color:"yellow"});
+const i=r[1];
+return s[e]&&d[e]?(getBlockNameValidity(i),worldbuildersetblock(s[e],d[e],i,1e3),void api[n.e](e,
+\`[AI] Jumbo: Started building with "\${i}"\`,{color:"yellow"})):void api[n.e](e,
+"[AI] Jumbo: Error: pos1 and pos2 must be set first.",{color:"red"})}if(l.startsWith("!jrandomize ")
+){if(!s[e]||!d[e])return void api[n.e](e,"[AI] Jumbo: Error: pos1 and pos2 must be set first.",
+{color:"yellow"});
+const r=[...o.matchAll(/"([^"]+)"\\s+([\\d.]+)%/g)];
+if(r.length<2)return void api[n.e](e,'[AI] Jumbo: Usage: !jrandomize "Block A" 70% "Block B" 30%',
+{color:"yellow"});
+const i=[];
+let l=0;
+for(const[,o,s]of r){getBlockNameValidity(o);
+const r=parseFloat(s);
+if(isNaN(r)||r<=0)return void api[n.e](e,
+'[AI] Jumbo: Invalid percentage for "\${block}": \${percentStr}',{color:"yellow"});
+l+=r,i.push({block:o,percent:r})}const p=i.map((e=>({block:e.block,weight:e.percent/l}))),
+randomBlock=()=>{const e=Math.random();
+let o=0;
+for(const r of p)if(o+=r.weight,e<=o)return r.block;
+return p[p.length-1].block};
+return worldbuildersetblock(s[e],d[e],"Air",1e3),c.randomBlock=randomBlock,void api[n.e](e,
+"[AI] Jumbo: Started randomized build.",{color:"yellow"})}if(l.startsWith("!jsphere")){const r=o
+.match(/^!jsphere\\s+"([^"]+)"(?:\\s+(hollow))?\$/i);
+if(!r)return void api[n.e](e,'[AI] Jumbo: Usage: !jsphere "Block Name" [hollow]',{color:"yellow"});
+const i=r[1];
+getBlockNameValidity(i);
+const l="hollow"===r[2]?.toLowerCase();
+if(!s[e]||!d[e])return void api[n.e](e,"[AI] Jumbo: Error: pos1 and pos2 must be set first.",
+{color:"red"});
+const[p,m,h]=s[e],[b,y,k]=d[e],g=Math.min(p,b),A=Math.max(p,b),I=Math.min(m,y),v=Math.max(m,y),
+w=Math.min(h,k),P=Math.max(h,k),M=(g+A)/2,C=(I+v)/2,J=(w+P)/2,x=(A-g)/2||1,j=(v-I)
+/2||1,S=(P-w)/2||1;
+return c={x:g,y:I,z:w,minX:g,minY:I,minZ:w,maxX:A,maxY:v,maxZ:P,chunkSizeX:6,chunkSizeY:6,
+chunkSizeZ:10,blockName:i,delay:1e3,lastTime:0,active:!0,totalChunks:Math.ceil((A-g+1)
+/6)*Math.ceil((v-I+1)/6)*Math.ceil((P-w+1)
+/10),chunksDone:0,sphereMode:!0,sphereCenter:[M,C,J],sphereRadiusX:x,sphereRadiusY:j,sphereRadiusZ:S,sphereHollow:l},void api[n.e](e,\`[AI] Jumbo: Started \${l?"hollow":"solid"} sphere with "\${i}"\`,{color:"yellow"})}if(l.startsWith("!jtexturize ")){const r=[...o.matchAll(/"([^"]+)"/g)
+].map((e=>e[1]));
+if(r.length<2)return void api[n.e](e,
+'[AI] Jumbo: Usage: !jtexturize "Target Block", "Alt1", "Alt2"...',{color:"yellow"});
+if(!s[e]||!d[e])return void api[n.e](e,"[AI] Jumbo: Error: pos1 and pos2 must be set first.",
+{color:"red"});
+for(let e=0;
+e<r.length;
+e++)getBlockNameValidity(r[e]);
+const[i,...l]=r,[p,m,h]=s[e],[b,y,k]=d[e];
+return c={x:Math.min(p,b),y:Math.min(m,y),z:Math.min(h,k),minX:Math.min(p,b),minY:Math.min(m,y),
+minZ:Math.min(h,k),maxX:Math.max(p,b),maxY:Math.max(m,y),maxZ:Math.max(h,k),chunkSizeX:6,
+chunkSizeY:6,chunkSizeZ:10,delay:1e3,lastTime:0,active:!0,totalChunks:Math.ceil((Math.abs(b-p)+1)
+/6)*Math.ceil((Math.abs(y-m)+1)/6)*Math.ceil((Math.abs(k-h)+1)/10),chunksDone:0,texturizeTask:!0,
+texturizeTarget:i,texturizeOptions:l},void api[n.e](e,\`[AI] Jumbo: Started texturizing "\${i}"\`,
+{color:"yellow"})}}}
+`;const B=`
+let r=api.getHeldItem(e),i=r?.name,l=r?.amount;
+if(["Bouncy Bomb","Super RPG","Grenade Launcher","RPG","Moonstone Explosive","Fireball","Iceball",
+"Moonstone Remote Explosive","Red Paintball Gun","Orange Paintball Gun","Yellow Paintball Gun",
+"Green Paintball Gun","Blue Paintball Gun","Purple Paintball Gun","Red Heavy Paintball Gun",
+"Orange Heavy Paintball Gun","Yellow Heavy Paintball Gun","Green Heavy Paintball Gun",
+"Blue Heavy Paintball Gun","Purple Heavy Paintball Gun"].includes(i)&&!isFreePosition(api[n.a](e),e)
+){e in y||(y[e]=0);
+let o=authorizePlayer(e);
+o&&-1===o[0]||y[e]++,2===y[e]&&(api.removeItemName(e,i,l),y[e]=0)}
+`;const C=`
+if(s in b){if(!(b[s][0]<api[n.n]()-1e4))return b[s][1];
+delete b[s]}const d=api.getPlayerIdFromDbId(s);
+if(isFreePosition([e,o,r],d))b[s]=[api[n.n](),null];
+else{let e=authorizePlayer(d);
+if(!e||-1!==e[0])return b[s]=[api[n.n](),"preventChange"],y[d]++,"preventChange";
+b[s]=[api[n.n](),null]}
+`;const S=`
+const r=getGuardedAreas(),i=api[n.j](e),l=Object.entries(r);
+if(!Array.isArray(l))return void api[n.e](e,
+"[AI] Jumbo: Oh no! an error occured (error 700). Please report this to Jumbo discord.",
+{color:"Yellow"});
+let s="[AI] Jumbo: Guarded Areas:\\n";
+for(const[r,d]of l)if(i===r||o){let l;
+l=o&&i===r?api[n.h](e):getDataFromDbId(r)?.name,s+=l?\`\\n\${l}:\`:"\\nError loading owner name";
+for(const[e,o,r]of d){const[i,n,l]=o,[d,c,p]=r,m=Math.min(i,d),h=Math.max(i,d),b=Math.min(n,c),
+y=Math.max(n,c),k=Math.min(l,p),g=Math.max(l,p);
+s+=\`\\n> \${e}\`,s+=\`\\n- From: (\${m}, \${b}, \${k})\`,s+=\`\\n- To:   (\${h}, \${y}, \${g})\`,s+=\`\\n- Size: \${h-m+1} x \${y-b+1} x \${g-k+1}\`}}api[
+n.e](e,s,{color:"Yellow"})
+`;const b=`
+const i={dev:1,admin:2,builder:3};
+if(!(o in i)&&!r)return void api[n.d]("Available ranks: dev, admin, builder",{color:"yellow"});
+const l=[5e5,1,5e5],s=api[n.k](l),d=api[n.h](e);
+if(r&&1===i[o]&&api[n.f](api[n.i](d),"canEditCode",!1),"Chest"!==s){for(;
+"Unloaded"===api[n.k](l);
+);
+return void api[n.d](
+"[AI] Jumbo: Looks like you haven't set up an owner, let's start setup. Please kick all players except yourself from the lobby, then say \\"!jsetup\\".",
+{color:"yellow"})}const c=getPromotedPlayers(),p=api[n.j](e),m=c.findIndex((e=>e.dbId===p));
+if(-1===m){if(!r){if(35===c.length)return void api[n.d](
+"[AI] Jumbo: You have reached the maximum amount of promoted players (35 is the max). Please demote at least one promoted player and try again.",
+{color:"yellow"});
+api.setStandardChestItemSlot(l,c.length+1,"Dirt",1,e,{customDisplayName:p,customAttributes:{name:d,
+rank:[i[o]]}}),api[n.d](\`[AI] Jumbo: \${d} now has the \${o} rank\`,{color:"yellow"}),1===i[o]
+&&api[n.f](e,"canEditCode",!0)}}else{const s=c[m].rank;
+if(r)if(s.includes(i[o])){if(1===s.length)for(let o=1;
+o<=35-m;
+o++){let r=api[n.p](l,m+o+1);
+if(!r){api.setStandardChestItemSlot(l,m+o,"Dirt",0,e,{});
+break}api.setStandardChestItemSlot(l,m+o,"Dirt",1,e,r.attributes)}else{let r=api[n.p](l,m+1);
+r.attributes.customAttributes.rank=r.attributes.customAttributes.rank.filter((e=>e!==i[o])),api
+.setStandardChestItemSlot(l,m+1,"Dirt",1,e,r.attributes)}api[n.d](
+\`[AI] Jumbo: \${d} no longer has the \${o} rank\`,{color:"yellow"})}else api[n.d](\`[AI] Jumbo: Failed to demote: \${d} does not have the \${o} rank\`,
+{color:"yellow"});
+else s.includes(i[o])?api[n.d](
+\`[AI] Jumbo: \${d} already has the \${o} rank\`,{color:"yellow"}):(api.setStandardChestItemSlot(l,m+1,"Dirt",1,e,{customDisplayName:p,customAttributes:{name:d,rank:[...s,i[o]]}}),api[n.d](\`[AI] Jumbo: \${d} now has the \${o} rank\`,
+{color:"yellow"}),1===i[o]&&api[n.f](e,"canEditCode",!0))}
+`;const y=`
+const[l,s,d]=e,[p,m,h]=o,b=Math.min(l,p),y=Math.max(l,p),k=Math.min(s,m),g=Math.max(s,m),A=Math.min(
+d,h),I=Math.max(d,h),v=Math.ceil((y-b+1)/6)*Math.ceil((g-k+1)/6)*Math.ceil((I-A+1)/10);
+(y-b+1)*(g-k+1)*(I-A+1)<=360?api[n.m]([b,k,A],[y,g,I],r):c={x:b,y:k,z:A,minX:b,minY:k,minZ:A,maxX:y,
+maxY:g,maxZ:I,chunkSizeX:6,chunkSizeY:6,chunkSizeZ:10,blockName:r,delay:i,lastTime:0,active:!0,
+totalChunks:v,chunksDone:0,randomBlock:null,sphereMode:!1,sphereCenter:null,sphereRadiusX:null,
+sphereRadiusY:null,sphereRadiusZ:null,sphereHollow:!1}
+`;const I=[d,r,p,h,g,k,m,B,C,S,b,y];for(let e=c;e<I.length;e+=1,c+=1){cmp(I[e],e+1)}if(api.getBlock(l)!=="Chest"){api.setBlock(l,"Chest")}api.setStandardChestItemSlot(l,0,"Dirt",1,undefined,{customAttributes:{version:e}});[i,o,s,c]=[undefined,undefined,undefined,undefined];n=false;api.sendMessage(myId,"Success!",{color:"lime"});
